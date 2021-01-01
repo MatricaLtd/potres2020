@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DataPotres2020 {
@@ -161,12 +162,15 @@ Future<Set<Marker>> getMarkersFromData() async {
     }
     print(element.properties.markerColor);
     markers.add(Marker(
-        markerId: MarkerId(element.properties.id.toString()),
-        position: LatLng(element.geometry.geometries.first.coordinates[1],
-            element.geometry.geometries.first.coordinates[0]),
-        infoWindow: InfoWindow(title: element.properties.title+"\n"+element.properties.description),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
+      markerId: MarkerId(element.properties.id.toString()),
+      position: LatLng(element.geometry.geometries.first.coordinates[1],
+          element.geometry.geometries.first.coordinates[0]),
+      infoWindow: InfoWindow(
+          title:
+              element.properties.title + "\n" + element.properties.description),
+      icon: bd,
+    ));
   });
-  
+
   return markers;
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:potres2020/data.dart';
+import 'package:sticky_infinite_list/sticky_infinite_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -51,12 +52,17 @@ class MapSampleState extends State<MapSample> {
                   _controller.complete(controller);
                 },
               )),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: Row(children: [ FloatingActionButton.extended(
         onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+        label: Text('Dodaj pomoć'),
+        icon: Icon(Icons.help),
       ),
-    );
+      FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: Text('Dodaj potrebu'),
+        icon: Icon(Icons.access_alarm),
+      ),
+    ]));
   }
 
   Future<void> _goToTheLake() async {

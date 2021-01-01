@@ -26,6 +26,7 @@ dependencies:
   dio:
   google_maps_flutter:
   google_maps_flutter_web:
+  sticky_infinite_list:
 
 
   # The following adds the Cupertino Icons font to your application.
