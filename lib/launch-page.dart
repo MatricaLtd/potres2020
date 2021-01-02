@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:potres2020/survey-page.dart';
+import 'package:potres2020/table-page.dart';
 
 class LaunchPage extends StatefulWidget {
   @override
@@ -22,6 +23,6 @@ class LaunchPageState extends State<LaunchPage> {
               textAlign: TextAlign.center,
             ),
             onPressed: () => (Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SurveyPage())))));
+                MaterialPageRoute(builder: (context) => TablePage(""))))));
   }
 }

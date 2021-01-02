@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:potres2020/form.dart';
 import 'package:potres2020/main.dart';
 import 'package:potres2020/map-page.dart';
+import 'package:potres2020/search-page.dart';
 import 'package:potres2020/survey.dart';
+import 'package:potres2020/table-page.dart';
 
 class SurveyPage extends StatefulWidget {
   @override
@@ -28,7 +31,7 @@ class SurveyPageState extends State<SurveyPage> {
                       (snapshot.data == null ? "" : snapshot.data[index].name)),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MapPage(snapshot.data[index].id)));
+                        MaterialPageRoute(builder: (context) => SearchPage(snapshot.data[index].id)));
                   },
                 ));
               },

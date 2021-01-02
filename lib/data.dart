@@ -134,7 +134,7 @@ class Properties {
   }
 }
 
-Future<Potres2020Data> getData(int setId) async {
+Future<List<Features>> getData(int setId, String search) async {
   var _dio = Dio();
   //_dio.options.headers = {"Authorization": "Bearer $token"};
 
@@ -142,14 +142,14 @@ Future<Potres2020Data> getData(int setId) async {
       'https://potres2020.openit.hr/api/v3/posts/geojson',
       options: Options(responseType: ResponseType.json));
   print(Potres2020Data.fromJson(response.data).features);
-  return Potres2020Data.fromJson(response.data);
+  return Potres2020Data.fromJson(response.data).features;
 }
 
 Future<Set<Marker>> getMarkersFromData(int setId) async {
   Set<Marker> markers = Set<Marker>();
 
-  Potres2020Data data = await getData(setId);
-  data.features.forEach((element) {
+  List<Features> data = await getData(setId, "");
+  data.forEach((element) {
     BitmapDescriptor bd;
 
     if (element.properties.markerColor == "#5BAA00") {

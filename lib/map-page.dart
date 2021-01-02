@@ -34,6 +34,7 @@ class MapPageState extends State<MapPage> {
             future: getMarkersFromData(widget.setId),
             builder: (context, snapshot) => GoogleMap(
                   buildingsEnabled: true,
+                  mapToolbarEnabled: true,
                   mapType: MapType.hybrid,
                   markers: snapshot.data,
                   initialCameraPosition: _kGooglePlex,
@@ -50,18 +51,9 @@ class MapPageState extends State<MapPage> {
                   child: FloatingActionButton.extended(
                     heroTag: "first",
                     onPressed: _goToTheLake,
-                    label: Text('Dodaj pomoć'),
-                    icon: Icon(Icons.help),
-                  )),
-              Container(
-                padding: EdgeInsets.all(20.0),
-                child: FloatingActionButton.extended(
-                  onPressed: _goToTheLake,
-                  heroTag: "second",
-                  label: Text('Dodaj potrebu'),
-                  icon: Icon(Icons.access_alarm),
-                ),
-              )
+                    label: Text('Dodaj'),
+                    icon: Icon(Icons.plus_one_sharp),
+                  ))
             ])));
   }
 
