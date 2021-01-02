@@ -1,15 +1,14 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class DataPotres2020 {
+class Potres2020Data {
   String type;
   List<Features> features;
   int total;
 
-  DataPotres2020({this.type, this.features, this.total});
+  Potres2020Data({this.type, this.features, this.total});
 
-  DataPotres2020.fromJson(Map<String, dynamic> json) {
+  Potres2020Data.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     if (json['features'] != null) {
       features = new List<Features>();
@@ -135,21 +134,21 @@ class Properties {
   }
 }
 
-Future<DataPotres2020> getData() async {
+Future<Potres2020Data> getData(int setId) async {
   var _dio = Dio();
   //_dio.options.headers = {"Authorization": "Bearer $token"};
 
   Response response = await _dio.get(
-      "https://potres2020.openit.hr/api/v3/posts/geojson?has_location=mapped&limit=200&offset=0&order=desc&order_unlocked_on_top=true&orderby=created&source%5B%5D=sms&source%5B%5D=twitter&source%5B%5D=web&source%5B%5D=email&status%5B%5D=published&status%5B%5D=draft",
+      'https://potres2020.openit.hr/api/v3/posts?set=$setId/geojson',
       options: Options(responseType: ResponseType.json));
-  print(DataPotres2020.fromJson(response.data).features);
-  return DataPotres2020.fromJson(response.data);
+  print(Potres2020Data.fromJson(response.data).features);
+  return Potres2020Data.fromJson(response.data);
 }
 
-Future<Set<Marker>> getMarkersFromData() async {
+Future<Set<Marker>> getMarkersFromData(int setId) async {
   Set<Marker> markers = Set<Marker>();
 
-  DataPotres2020 data = await getData();
+  Potres2020Data data = await getData(setId);
   data.features.forEach((element) {
     BitmapDescriptor bd;
 
