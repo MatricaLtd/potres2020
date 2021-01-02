@@ -139,7 +139,7 @@ Future<Potres2020Data> getData(int setId) async {
   //_dio.options.headers = {"Authorization": "Bearer $token"};
 
   Response response = await _dio.get(
-      'https://potres2020.openit.hr/api/v3/posts?set=$setId/geojson',
+      'https://potres2020.openit.hr/api/v3/posts/geojson',
       options: Options(responseType: ResponseType.json));
   print(Potres2020Data.fromJson(response.data).features);
   return Potres2020Data.fromJson(response.data);
