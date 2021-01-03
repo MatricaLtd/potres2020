@@ -28,14 +28,19 @@ class TablePageState extends State<TablePage> {
                       return Container(
                           padding: EdgeInsets.all(10),
                           child: Text(
-                              (snapshot.data == null 
+                              (snapshot.data == null
                                   ? ""
-                                  : snapshot.data[index].properties.description.contains(widget.search) ?  (snapshot.data[index].properties.id
-                                          .toString() +
-                                      " " +
-                                      snapshot.data[index].properties.title + ". "+
-                                      snapshot
-                                          .data[index].properties.description): ""),
+                                  : snapshot.data[index].properties.description
+                                          .contains(widget.search)
+                                      ? (snapshot.data[index].properties.id
+                                              .toString() +
+                                          " " +
+                                          snapshot
+                                              .data[index].properties.title +
+                                          ". " +
+                                          snapshot.data[index].properties
+                                              .description)
+                                      : ""),
                               textScaleFactor: 2));
                     },
                   )))
