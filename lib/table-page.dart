@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:potres2020/data.dart';
+import 'package:potres2020/posts-data.dart';
 
 class TablePage extends StatefulWidget {
   const TablePage(this.search) : super();
@@ -19,31 +19,56 @@ class TablePageState extends State<TablePage> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
+      Scrollbar(
+          child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: FutureBuilder<List<Results>>(
+                  future: getPostsData(),
+                  builder: (context, snapshot) => DataTable(
+                      dataRowHeight: 100,
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: Text(
+                            'Id',
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Opis',
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Duži opis',
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Telefon',
+                          ),
+                        ),
+                      ],
+                      rows: snapshot.data != null
+                          ? snapshot.data
+                              .map(
+                                (e) => DataRow(
+                                  cells: <DataCell>[
+                                    DataCell(Text(e.id.toString())),
+                                    DataCell(Container(child: Text(e.title))),
+                                    DataCell(Container(child: Text(e.content))),
+                                    DataCell(Container(child: Text(e.telefon)))
+                                  ],
+                                ),
+                              )
+                              .toList()
+                          : List<DataRow>())))),
       Card(
-          child: FutureBuilder<List<Features>>(
-              future: getData(0, widget.search),
-              builder: (context, snapshot) => ListView.builder(
-                    itemCount: snapshot.data == null ? 0 : snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                              (snapshot.data == null
-                                  ? ""
-                                  : snapshot.data[index].properties.description
-                                          .contains(widget.search)
-                                      ? (snapshot.data[index].properties.id
-                                              .toString() +
-                                          " " +
-                                          snapshot
-                                              .data[index].properties.title +
-                                          ". " +
-                                          snapshot.data[index].properties
-                                              .description)
-                                      : ""),
-                              textScaleFactor: 2));
-                    },
-                  )))
+          child: TextFormField(
+        decoration: const InputDecoration(
+          icon: const Icon(Icons.book_sharp),
+          hintText: 'Upišite što tražite',
+        ),
+      ))
     ]);
   }
 }
